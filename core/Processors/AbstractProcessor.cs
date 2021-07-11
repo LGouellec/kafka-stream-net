@@ -6,7 +6,9 @@ using Streamiz.Kafka.Net.Processors.Internal;
 using Streamiz.Kafka.Net.SerDes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Streamiz.Kafka.Net.Processors
 {
@@ -77,49 +79,47 @@ namespace Streamiz.Kafka.Net.Processors
 
         public virtual void Forward<K1, V1>(K1 key, V1 value)
         {
-            log.Debug($"{logPrefix}Forward<{typeof(K1).Name},{typeof(V1).Name}> message with key {key} and value {value} to each next processor");
-            foreach (var n in Next)
-                if (n is IProcessor<K1, V1>)
-                    (n as IProcessor<K1, V1>).Process(key, value);
+            log.Debug($"{logPrefix}Forward<{nameof(K1)},{nameof(V1)}> message with key {key} and value {value} to each next processor");
+            Parallel.ForEach(Next.OfType<IProcessor<K1, V1>>(), p => p.Process(key, value));
         }
 
         public virtual void Forward<K1, V1>(K1 key, V1 value, string name)
         {
-            foreach (var n in Next)
-            {
-                if (n is IProcessor<K1, V1> && n.Name.Equals(name))
-                {
-                    log.Debug($"{logPrefix}Forward<{typeof(K1).Name},{typeof(V1).Name}> message with key {key} and value {value} to processor {name}");
-                    (n as IProcessor<K1, V1>).Process(key, value);
-                }
-            }
-        }
+            var processors = Next.OfType<IProcessor<K1, V1>>()
+                .Where(p => p.Name.Equals(name));
 
-        public virtual void Forward(K key, V value)
-        {
-            log.Debug($"{logPrefix}Forward<{typeof(K).Name},{typeof(V).Name}> message with key {key} and value {value} to each next processor");
-            foreach (var n in Next)
+            Parallel.ForEach(processors, processor =>
             {
-                if (n is IProcessor<K, V>)
-                    (n as IProcessor<K, V>).Process(key, value);
-                else
-                    n.Process(key, value);
-            }
+                log.Debug($"{logPrefix}Forward<{nameof(K1)},{nameof(V1)}> message with key {key} and value {value} to processor {name}");
+                processor.Process(key, value);
+            });
         }
 
         public virtual void Forward(K key, V value, string name)
         {
-            foreach (var n in Next)
+            var processors = Next.Where(p => p.Name.Equals(name));
+
+            Parallel.ForEach(processors, processor =>
             {
-                if (n.Name.Equals(name))
-                {
-                    log.Debug($"{logPrefix}Forward<{typeof(K).Name},{typeof(V).Name}> message with key {key} and value {value} to processor {name}");
-                    if (n is IProcessor<K, V>)
-                        (n as IProcessor<K, V>).Process(key, value);
-                    else
-                        n.Process(key, value);
-                }
-            }
+                log.Debug($"{logPrefix}Forward<{nameof(K)},{nameof(V)}> message with key {key} and value {value} to processor {name}");
+                if (processor is IProcessor<K, V> genericProcessor)
+                    genericProcessor.Process(key, value);
+                else
+                    processor.Process(key, value);
+            });
+        }
+
+        public virtual void Forward(K key, V value)
+        {
+            log.Debug($"{logPrefix}Forward<{nameof(K)},{nameof(V)}> message with key {key} and value {value} to each next processor");
+
+            Parallel.ForEach(Next, processor =>
+            {
+                if (processor is IProcessor<K, V> genericProcessor)
+                    genericProcessor.Process(key, value);
+                else
+                    processor.Process(key, value);
+            });
         }
 
         #endregion
@@ -135,7 +135,7 @@ namespace Streamiz.Kafka.Net.Processors
             log.Debug($"{logPrefix}Process context initialized");
         }
 
-        protected void LogProcessingKeyValue(K key, V value) => log.Debug($"{logPrefix}Process<{typeof(K).Name},{typeof(V).Name}> message with key {key} and {value} with record metadata [topic:{Context.RecordContext.Topic}|partition:{Context.RecordContext.Partition}|offset:{Context.RecordContext.Offset}]");
+        protected void LogProcessingKeyValue(K key, V value) => log.Debug($"{logPrefix}Process<{nameof(K)},{nameof(V)}> message with key {key} and {value} with record metadata [topic:{Context.RecordContext.Topic}|partition:{Context.RecordContext.Partition}|offset:{Context.RecordContext.Offset}]");
 
         #region Setter
 
