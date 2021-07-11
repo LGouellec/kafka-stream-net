@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DotNet.Testcontainers" Version="1.5.0-beta.20210510.2" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="1.3.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\core\Streamiz.Kafka.Net.csproj" />
+      <ProjectReference Include="..\..\serdes\Streamiz.Kafka.Net.SchemaRegistry.SerDes.Avro\Streamiz.Kafka.Net.SchemaRegistry.SerDes.Avro.csproj" />
+      <ProjectReference Include="..\..\serdes\Streamiz.Kafka.Net.SchemaRegistry.SerDes.Protobuf\Streamiz.Kafka.Net.SchemaRegistry.SerDes.Protobuf.csproj" />
+      <ProjectReference Include="..\..\serdes\Streamiz.Kafka.Net.SchemaRegistry.SerDes\Streamiz.Kafka.Net.SchemaRegistry.SerDes.csproj" />
+    </ItemGroup>
+
+</Project>

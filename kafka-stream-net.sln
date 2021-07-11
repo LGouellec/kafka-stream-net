@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamiz.Kafka.Net.SchemaRe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamiz.Kafka.Net.SchemaRegistry.SerDes.Protobuf", "serdes\Streamiz.Kafka.Net.SchemaRegistry.SerDes.Protobuf\Streamiz.Kafka.Net.SchemaRegistry.SerDes.Protobuf.csproj", "{21CD1F56-F1AF-42BD-877B-43AC36A43793}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Streamiz.Kafka.Net.IntegrationTests", "test\Streamiz.Kafka.Net.IntegrationTests\Streamiz.Kafka.Net.IntegrationTests.csproj", "{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -175,6 +177,18 @@ Global
 		{21CD1F56-F1AF-42BD-877B-43AC36A43793}.Release|x64.Build.0 = Release|Any CPU
 		{21CD1F56-F1AF-42BD-877B-43AC36A43793}.Release|x86.ActiveCfg = Release|Any CPU
 		{21CD1F56-F1AF-42BD-877B-43AC36A43793}.Release|x86.Build.0 = Release|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Debug|x64.Build.0 = Debug|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Debug|x86.Build.0 = Debug|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Release|x64.ActiveCfg = Release|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Release|x64.Build.0 = Release|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -191,6 +205,7 @@ Global
 		{2BC1A318-1AE9-4A32-B8B1-D8296FABFF8B} = {3C748A6C-9316-4507-8FEE-77C684C4F028}
 		{4D0FD00A-D2C5-470A-A808-C23F1448E68E} = {3C748A6C-9316-4507-8FEE-77C684C4F028}
 		{21CD1F56-F1AF-42BD-877B-43AC36A43793} = {3C748A6C-9316-4507-8FEE-77C684C4F028}
+		{30BB9AB9-FED7-43E4-9D6E-290EFE54E9D5} = {9526F3C9-8E0C-490B-A2B0-F6DA233314D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66BAF5BD-970F-480F-92B9-761323FFAA58}
